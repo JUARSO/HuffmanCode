@@ -1,22 +1,24 @@
 class NodeList{
     /**
      * Contructor de la clase Node el cual guarda el dato y el siguiete en el puntero
-     * @param data: el valor que guarda en el Node
+     * @param data: el valor que guarda en el node
      * @param next: el apuntador del siguiete node
+     * @param num: Cantidad dentro del archivo
      */
-    constructor(data,next) {
+    constructor(data,num, next) {
         this.data = data;
+        this.num = num;
         this.next = next;
+
     }
 }
-
 class List{
     /**
      * Constructor de la lista enlaza tiene dos parametros el dato y el siguiete dato a utilizar
      * @param data: valor de dato guradado en la lista enlazada.
      * @param next: el apuntador del suiguiente valor.
      */
-    constructor(data,next) {
+    constructor(data,num,next) {
         this.head = null;
         this.size = 0;
     }
@@ -25,8 +27,8 @@ class List{
      * Añade un nuevo dato en la lista enlazada y revisa si existe el primer dato
      * @param data
      */
-    add(data){
-        const newNode = new NodeList(data,null)
+    add(data,num){
+        const newNode = new NodeList(data,num,null)
         if(!this.head){
             this.head = newNode
         }else {
@@ -44,11 +46,11 @@ class List{
      * @param data: el valor que va a ser agregado
      * @param index: posicion en la cual va a ser agregado el dato
      */
-    insertIndex(data,index){
+    insertIndex(data,num,index){
         if(index < 0 || index > this.size){
             return null
         }
-        const newNode = new Node(data);
+        const newNode = new Node(data,num);
         let current = this.head;
         let previous;
 
@@ -60,7 +62,6 @@ class List{
                 previous = current;
                 current = current.next;
             }
-
             newNode.next = current;
             previous.next = newNode;
         }
@@ -77,13 +78,13 @@ class List{
         let current = this.head;
         let result = '';
         while (current) {
-            result += current.data += '->';
+            result += current.data;
+            result += current.num += "->"
             current = current.next;
         }
         result += 'X';
         return result;
     }
-
     /**
      * Remueve el node en la poscion que se le solcita en la lista enlazada
      * @param index la posicion la cual se va a eliminar
@@ -123,6 +124,11 @@ class List{
         return this.size;
     }
 }
+const  list = new List();
+list.add("A",3)
+list.add("B",4)
+list.add("C",5)
+console.log(list.print());
 
 class NodeTree{
     /**
